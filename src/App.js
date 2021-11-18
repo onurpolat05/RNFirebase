@@ -1,9 +1,9 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Login from './pages/auth/Login/Login';
-import Sign from './pages/auth/Sign/Sign';
-import Messages from './pages/Messages/Messages';
+import Login from './pages/auth/Login';
+import Sign from './pages/auth/Sign';
+import Messages from './pages/Messages';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const AuthStack = () => {
