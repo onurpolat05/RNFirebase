@@ -24,6 +24,7 @@ export default function Login({navigation}) {
         formValues.usermail,
         formValues.password,
       );
+      navigation.navigate('Messages');
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -49,6 +50,7 @@ export default function Login({navigation}) {
               onType={handleChange('password')}
               value={values.password}
               placeHolderText="şifrenizi giriniz.."
+              isSecure
             />
             <Button text="Giriş Yap" onPress={handleSubmit} loading={loading} />
           </>

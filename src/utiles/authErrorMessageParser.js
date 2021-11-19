@@ -6,6 +6,10 @@ export default function (errorCode) {
       return 'Kullanıcı zaten kayıtlı';
     case 'auth/user-not-found':
       return 'Kullanıcı bulunamadı';
+    case 'auth/weak-password':
+      return 'Zayıf şifre';
+    case 'auth/wrong-password':
+      return 'Şifre geçersiz';
     default:
       return errorCode;
   }

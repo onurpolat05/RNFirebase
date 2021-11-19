@@ -1,20 +1,50 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, Text} from 'react-native';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import styles from './Sign.style';
 import {Formik} from 'formik';
+import auth from '@react-native-firebase/auth';
+import {showMessage} from 'react-native-flash-message';
+import authErrorMessageParser from '../../../utiles/authErrorMessageParser';
 const initialFormValues = {
   usermail: '',
   password: '',
   repassword: '',
 };
 export default function Sign({navigation}) {
+  const [loading, setLoading] = useState(false);
+
   function handleLogin() {
     navigation.navigate('Login');
   }
-  function handleFormSubmit(formValues) {
-    console.log(formValues);
+  async function handleFormSubmit(formValues) {
+    if (formValues.password !== formValues.repassword) {
+      showMessage({
+        message: 'Şifreler uyuşmuyor',
+        type: 'danger',
+      });
+      return;
+    }
+    try {
+       setLoading(true);
+       await auth().createUserWithEmailAndPassword(
+        formValues.usermail,
+        formValues.repassword,
+      );
+      showMessage({
+        message: 'Kullanıcı oluşturuldu',
+        type: 'success',
+      });
+      navigation.navigate('Login');
+      setLoading(false);
+    } catch (error) {
+      showMessage({
+        message: authErrorMessageParser(error.code),
+        type: 'danger',
+      });
+      setLoading(false);
+    }
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -31,13 +61,15 @@ export default function Sign({navigation}) {
               onType={handleChange('password')}
               values={values.password}
               placeHolderText="şifrenizi giriniz.."
+              isSecure
             />
             <Input
               onType={handleChange('repassword')}
               values={values.repassword}
               placeHolderText="şifrenizi tekrar giriniz.."
+              isSecure
             />
-            <Button text="Kayıt Ol" onPress={handleSubmit} />
+            <Button text="Kayıt Ol" loading={loading} onPress={handleSubmit} />
           </>
         )}
       </Formik>

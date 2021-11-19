@@ -7,12 +7,12 @@ export default function Input({placeHolderText,value, onType, iconName, isSecure
   return (
     <View style={styles.container}>
         <TextInput
+          autoCapitalize="none"
           style={styles.input}
           onChangeText={onType}
           placeholder={placeHolderText}
           value={value}
-          secureTextEnt
-          ry={isSecure}
+          secureTextEntry={isSecure}
         />
         <Icon name={iconName} size={25} color="gray" />
     </View>
