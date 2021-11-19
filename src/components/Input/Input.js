@@ -1,17 +1,20 @@
 import React from 'react';
 import {View, TextInput} from 'react-native';
 import styles from './Input.style';
-export default function Input(props) {
-  const {placeHolderText} = props;
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+export default function Input({placeHolderText,value, onType, iconName, isSecure}) {
   return (
     <View style={styles.container}>
-      <View style={styles.input}>
         <TextInput
-          onChangeText={() => {}}
+          style={styles.input}
+          onChangeText={onType}
           placeholder={placeHolderText}
-          keyboardType="numeric"
+          value={value}
+          secureTextEnt
+          ry={isSecure}
         />
-      </View>
+        <Icon name={iconName} size={25} color="gray" />
     </View>
   );
 }
