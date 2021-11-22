@@ -5,6 +5,7 @@ import Login from './pages/auth/Login';
 import Sign from './pages/auth/Sign';
 import Messages from './pages/Messages';
 import FlashMessage from "react-native-flash-message";
+import { colors } from './configs/Colors';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const AuthStack = () => {
@@ -17,9 +18,9 @@ export default function App() {
   };
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator screenOptions={{headerShown: false}}  >
         <Stack.Screen name="AuthStack" component={AuthStack} />
-        <Stack.Screen name="Messages" component={Messages} />
+        <Stack.Screen name="Messages" component={Messages}  />
       </Stack.Navigator>
       <FlashMessage position="top" />
     </NavigationContainer>
